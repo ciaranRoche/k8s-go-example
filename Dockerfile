@@ -1,13 +1,10 @@
-FROM golang:1.7.4-alpine
+FROM alpine:3.5
 MAINTAINER ciaranRoche
 
-ENV SOURCES /go/src/github.com/ciaranRoche/cloud-native-go/
-
-COPY . ${SOURCES}
-
-RUN cd ${SOURCES} && CGO_ENABLED=0 go install
+COPY ./cloud-native-go /app/cloud-native-go
+RUN chmod +x /app/cloud-native-go
 
 ENV PORT 8080
 EXPOSE 8080
 
-ENTRYPOINT cloud-native-go
+ENTRYPOINT /app/cloud-native-go
